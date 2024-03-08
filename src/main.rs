@@ -31,6 +31,11 @@ fn delete_post(_id: u32) -> status::NoContent {
     status::NoContent
 }
 
+#[catch(404)]
+fn not_found() -> Value {
+    json!("Not Found")
+}
+
 #[rocket::main]
 async fn main() {
     let _ = rocket::build()
@@ -38,6 +43,7 @@ async fn main() {
             "/",
             routes![get_posts, view_post, create_post, update_post, delete_post],
         )
+        .register("/", catchers![not_found])
         .launch()
         .await;
 }
