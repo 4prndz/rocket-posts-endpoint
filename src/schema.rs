@@ -2,9 +2,12 @@
 
 diesel::table! {
     posts (id) {
-        id -> Nullable<Integer>,
+        id -> Integer,
         name -> Text,
         title -> Text,
+        content -> Nullable<Text>,
+        likes -> Nullable<Integer>,
+        is_published -> Bool,
         created_at -> Timestamp,
     }
 }
